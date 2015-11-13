@@ -9,6 +9,9 @@ type Options struct {
 }
 
 func Open(path string, mode os.FileMode, options *Options) (*DB, error) {
+	if _, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, mode); err != nil {
+		return nil, err
+	}
 	return &DB{}, nil
 }
 
